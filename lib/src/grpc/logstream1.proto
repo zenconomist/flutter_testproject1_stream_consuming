@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package logevents;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "./logstream1_proto";
+
+service LogEventService {
+  rpc StreamLogEvents (StreamLogEventsRequest) returns (stream LogEvent);
+}
+
+message StreamLogEventsRequest {
+    string user = 1;
+}
+
+message LogEvents {
+    repeated LogEvent events = 1;
+}
+
+message LogEvent {
+  int32 id = 1;
+  string msg = 2;
+  google.protobuf.Timestamp timestamp = 3;
+}
+
