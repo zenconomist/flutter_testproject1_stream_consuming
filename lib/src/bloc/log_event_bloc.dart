@@ -24,7 +24,8 @@ class LogEventBloc extends Bloc<LogEventEvent, LogEventState> {
       await for (final logEvent
           in client.streamLogEvents(StreamLogEventsRequest())) {
         logEvents.add(logEvent);
-        emit(LogEventLoaded(logEvents));
+        emit(LogEventLoaded(
+            List.from(logEvents))); // Make a copy of the logEvents list
       }
     } catch (error) {
       emit(LogEventError(error.toString()));
