@@ -4,7 +4,7 @@ abstract class LogEventState extends Equatable {
   const LogEventState();
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
 class LogEventInitial extends LogEventState {}
@@ -12,12 +12,12 @@ class LogEventInitial extends LogEventState {}
 class LogEventLoading extends LogEventState {}
 
 class LogEventLoaded extends LogEventState {
-  final LogEvent logEvent;
+  final List<LogEvent> logEvents;
 
-  const LogEventLoaded(this.logEvent);
+  const LogEventLoaded(this.logEvents);
 
   @override
-  List<Object> get props => [logEvent];
+  List<Object?> get props => [logEvents];
 }
 
 class LogEventError extends LogEventState {
@@ -26,5 +26,5 @@ class LogEventError extends LogEventState {
   const LogEventError(this.message);
 
   @override
-  List<Object> get props => [message];
+  List<Object?> get props => [message];
 }

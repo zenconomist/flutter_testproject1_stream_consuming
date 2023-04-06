@@ -42,15 +42,17 @@ class LogEventList extends StatelessWidget {
           }
 
           if (state is LogEventLoaded) {
-            final logEvent = state.logEvent;
-            return ListView(
-              children: [
-                ListTile(
+            final logEvents = state.logEvents;
+            return ListView.builder(
+              itemCount: logEvents.length,
+              itemBuilder: (context, index) {
+                final logEvent = logEvents[index];
+                return ListTile(
                   title: Text(logEvent.msg),
                   subtitle: Text(
                       'ID: ${logEvent.id} - Timestamp: ${logEvent.timestamp.toDateTime()}'),
-                ),
-              ],
+                );
+              },
             );
           }
 

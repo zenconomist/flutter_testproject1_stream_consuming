@@ -12,7 +12,7 @@ abstract class LogEventEvent extends Equatable {
   LogEventEvent();
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
 /*

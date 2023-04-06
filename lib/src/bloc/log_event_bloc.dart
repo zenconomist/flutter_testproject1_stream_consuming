@@ -14,6 +14,7 @@ class LogEventBloc extends Bloc<LogEventEvent, LogEventState> {
   }
 
   final LogEventServiceClient client;
+  final List<LogEvent> logEvents = [];
 
   void _onStartListening(
       StartListening event, Emitter<LogEventState> emit) async {
@@ -22,7 +23,8 @@ class LogEventBloc extends Bloc<LogEventEvent, LogEventState> {
     try {
       await for (final logEvent
           in client.streamLogEvents(StreamLogEventsRequest())) {
-        emit(LogEventLoaded(logEvent));
+        logEvents.add(logEvent);
+        emit(LogEventLoaded(logEvents));
       }
     } catch (error) {
       emit(LogEventError(error.toString()));
