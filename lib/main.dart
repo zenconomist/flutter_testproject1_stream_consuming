@@ -40,18 +40,21 @@ class LogEventList extends StatelessWidget {
           if (state is LogEventError) {
             return Center(child: Text('Error: ${state.message}'));
           }
-          dynamic logEvents = [(state as LogEventLoaded)];
-          return ListView.builder(
-            itemCount: logEvents.length,
-            itemBuilder: (context, index) {
-              final logEvent = logEvents[index];
-              return ListTile(
-                title: Text(logEvent.msg),
-                subtitle: Text(
-                    'ID: ${logEvent.id} - Timestamp: ${logEvent.timestamp.toDateTime()}'),
-              );
-            },
-          );
+
+          if (state is LogEventLoaded) {
+            final logEvent = state.logEvent;
+            return ListView(
+              children: [
+                ListTile(
+                  title: Text(logEvent.msg),
+                  subtitle: Text(
+                      'ID: ${logEvent.id} - Timestamp: ${logEvent.timestamp.toDateTime()}'),
+                ),
+              ],
+            );
+          }
+
+          return Container(); // This line should not be reached, but it's here to satisfy the builder function.
         },
       ),
     );
