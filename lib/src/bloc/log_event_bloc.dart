@@ -23,7 +23,8 @@ class LogEventBloc extends Bloc<LogEventEvent, LogEventState> {
     try {
       await for (final logEvent
           in client.streamLogEvents(StreamLogEventsRequest())) {
-        logEvents.add(logEvent);
+        logEvents.insert(0,
+            logEvent); // Insert the new log event at the beginning of the list
         emit(LogEventLoaded(
             List.from(logEvents))); // Make a copy of the logEvents list
       }
